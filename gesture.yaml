@@ -1,0 +1,16 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: /mnt/data1/Dataset/Hagrid-yolo/ # dataset root dir
+train: /mnt/data1/Dataset/Hagrid-yolo/images/train.txt # train images (relative to 'path') 118287 images
+val: /mnt/data1/Dataset/Hagrid-yolo/images/val.txt # val images (relative to 'path') 5000 images
+test: /mnt/data1/Dataset/Hagrid-yolo/images/test.txt # 20288 of 40670 images, submit to https://competitions.codalab.org/competitions/20794
+
+# Classes
+names:
+  0: point
+  1: call
+  2: fist
+  3: like
+  4: ok
+  5: palm
+  6: stop
+  7: no_gesture
