@@ -5,6 +5,8 @@ from .tasks import (
     ClassificationModel,
     DetectionModel,
     SegmentationModel,
+    DinoVisionTransformer,
+    vit_large,
     attempt_load_one_weight,
     attempt_load_weights,
     guess_model_scale,
@@ -26,4 +28,6 @@ __all__ = (
     "SegmentationModel",
     "ClassificationModel",
     "BaseModel",
+    "DinoVisionTransformer",
+    "vit_large",
 )

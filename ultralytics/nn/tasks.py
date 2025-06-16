@@ -69,6 +69,7 @@ from ultralytics.nn.modules import (
     YOLOESegment,
     v10Detect,
 )
+from ultralytics.nn.dinov2 import DinoVisionTransformer, vit_large
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, YAML, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
 from ultralytics.utils.loss import (
@@ -1654,7 +1655,7 @@ def parse_model(d, ch, verbose=True):
             A2C2f,
         }
     )
-    for i, (f, n, m, args) in enumerate(d["backbone"] + d["head"]):  # from, number, module, args
+    for i, (f, n, m, args) in enumerate(d["backbone"]+ d["head"]):  # from, number, module, args
         m = (
             getattr(torch.nn, m[3:])
             if "nn." in m
@@ -1667,6 +1668,7 @@ def parse_model(d, ch, verbose=True):
                 with contextlib.suppress(ValueError):
                     args[j] = locals()[a] if a in locals() else ast.literal_eval(a)
         n = n_ = max(round(n * depth), 1) if n > 1 else n  # depth gain
+        
         if m in base_modules:
             c1, c2 = ch[f], args[0]
             if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)
@@ -1689,6 +1691,7 @@ def parse_model(d, ch, verbose=True):
                     args.extend((True, 1.2))
             if m is C2fCIB:
                 legacy = False
+                
         elif m is AIFI:
             args = [ch[f], *args]
         elif m in frozenset({HGStem, HGBlock}):
@@ -1737,6 +1740,7 @@ def parse_model(d, ch, verbose=True):
         if i == 0:
             ch = []
         ch.append(c2)
+        
     return torch.nn.Sequential(*layers), sorted(save)
 
 
